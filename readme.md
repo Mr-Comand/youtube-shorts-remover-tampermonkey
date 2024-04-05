@@ -57,7 +57,7 @@ The script provides the following configuration options:
 - `c_disableShortPageScrolling`: Disables scrolling on YouTube Shorts pages.
 
 ## Configuration menu
-![Configuration Menu](images\configuration_menu.png)
+![Configuration Menu](images/configuration_menu.png)
 ## Usage
 
 - Once the script is installed and configured (if necessary), it will automatically remove YouTube Shorts from the specified pages whenever you visit them on the YouTube website.
