@@ -6,6 +6,8 @@
 // @author       Mr_Comand
 // @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
+// @updateURL    https://raw.githubusercontent.com/Mr-Comand/youtube-shorts-remover-tampermonkey/main/merrged.user.js
+// @downloadURL  https://raw.githubusercontent.com/Mr-Comand/youtube-shorts-remover-tampermonkey/main/merrged.user.js
 // @grant        GM_setValue
 // @grant        GM_getValue
 // ==/UserScript==

@@ -27,21 +27,20 @@ This userscript removes YouTube Shorts from various pages on the YouTube website
 
 3. **Install the Script:**
    - **Base Version:**
-     - Install the base(base.js) version of if you want to edit the configuration directly  in the script file.
-    - Install the base(base.js) version of the script by clicking on the following link and then click on the "Install" button in the userscript manager prompt:
-     - [YouTube Shorts Remover Base Version](link-to-merged-version-userscript-file)
+     - Install the base (base.js) version if you want to edit the configuration directly in the script file.
+     - Install the base (base.js) version of the script by clicking on the following link and then click on the "Install" button in the userscript manager prompt:
+     - [YouTube Shorts Remover Base Version](https://raw.githubusercontent.com/Mr-Comand/youtube-shorts-remover-tampermonkey/main/base.user.js)
 
    - **Full Version:**
-     - Install the full(merged.js) version of if you want to have an configuration menu at [Settings>Playback and performance](https://www.youtube.com/account_playback) the configuration will not be saved in the account but on the browser.
-     - Install the full(merged.js) version of the script by clicking on the following link and then click on the "Install" button in the userscript manager prompt:
-       - [YouTube Shorts Remover Full Version](link-to-merged-version-userscript-file)
+     - Install the full (merged.js) version if you want to have a configuration menu at [Settings>Playback and performance](https://www.youtube.com/account_playback). The configuration will not be saved in the account but on the browser.
+     - Install the full (merged.js) version of the script by clicking on the following link and then click on the "Install" button in the userscript manager prompt:
+       - [YouTube Shorts Remover Full Version](https://raw.githubusercontent.com/Mr-Comand/youtube-shorts-remover-tampermonkey/main/merrged.user.js)
 
 4. **Configure Options (Optional):**
-    After installing the script, you can optionally configure its options by
-        - using the configuration menu at [Settings>Playback and performance](https://www.youtube.com/account_playback)
-        -  editing the script directly
-    depending on the version you are using.
-    By default all  features of the script will be enabled and no changes should be needed for basic use.
+    - After installing the script, you can optionally configure its options depending on the version you are using by:
+        - using the configuration menu at [Settings > Playback and performance](https://www.youtube.com/account_playback)
+        - editing the script directly 
+    By default, all features of the script will be enabled and no changes should be needed for basic use.
 
 ## Configuration
 
