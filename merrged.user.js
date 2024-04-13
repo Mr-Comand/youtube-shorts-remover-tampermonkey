@@ -4,6 +4,7 @@
 // @version      full.1.0
 // @description  Removes Youtube shorts from search results and watch page. Configuration Menu to the Settings at https://www.youtube.com/account_playback
 // @author       Mr_Comand
+// @license      MIT
 // @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @updateURL    https://raw.githubusercontent.com/Mr-Comand/youtube-shorts-remover-tampermonkey/main/merrged.user.js
