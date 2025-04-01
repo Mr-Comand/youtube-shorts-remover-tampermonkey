@@ -77,13 +77,15 @@
 	//https://www.youtube.com/shorts/*
 	var youtubeShortPagePattern = /^https?:\/\/(www\.)?youtube\.com\/shorts.*$/;
 
-	// Define the regex pattern for the YouTube channel pages
-	//https://www.youtube.com/LinusTechTips or https://www.youtube.com/@LinusTechTips ...
-	var youtubeChannelPagePattern = /^https?:\/\/(www\.)?youtube\.com\/(?!feed.*)(?!watch.*)(?!short.*)(?!playlist.*)(?!podcasts.*)(?!gaming.*)(?!results.*).+$/;
-
-     // Define the regex pattern for the YouTube search page
-     //https://www.youtube.com/shorts/*
-     var youtubeSearchPagePattern = /^https?:\/\/(www\.)?youtube\.com\/results.*$/;
+    // Define the regex pattern for the YouTube channel pages
+    //https://www.youtube.com/LinusTechTips or https://www.youtube.com/@LinusTechTips ...
+    var youtubeChannelPagePattern = /^https?:\/\/(www\.)?youtube\.com\/(?!feed.*)(?!watch.*)(?!short.*)(?!playlist.*)(?!podcasts.*)(?!gaming.*)(?!results.*).+$/;
+    // Define the regex pattern for the YouTube channel short pages
+    //https://www.youtube.com/LinusTechTips/shorts or https://www.youtube.com/@LinusTechTips/shorts ...
+    var youtubeChannelShortsPagePattern = /^(https?:\/\/(?:www\.)?youtube\.com\/(?!feed.*)(?!watch.*)(?!short.*)(?!playlist.*)(?!podcasts.*)(?!gaming.*)(?!results.*).+)\/shorts\/?$/;
+    // Define the regex pattern for the YouTube search page
+    //https://www.youtube.com/shorts/*
+    var youtubeSearchPagePattern = /^https?:\/\/(www\.)?youtube\.com\/results.*$/;
 
 	// Define the regex pattern for the Config pages
 	//https://www.youtube.com/account_playback
@@ -163,27 +165,32 @@
 			return;
 		}
 
-		if (youtubeChannelPagePattern.test(currentURL)&& config.c_removeFormChannel) {
-			// URL & config matches
-			removeReelShelfRenderer();
-			removeFormVideoOverview();
-			// Select all elements with tab-title Shorts
-			var elementsToRemove = document.querySelectorAll('[tab-title="Shorts"]');
-			
-			// Loop through each selected element and remove it
-			elementsToRemove.forEach(function (element) {
-				element.parentNode.removeChild(element);
-			});
-			log("Shorts removed from channel.");
-			return;
-		}
-		if (youtubeSearchPagePattern.test(currentURL)&& config.c_removeFormSearch) {
-			// URL & config matches
-			removeReelShelfRenderer();
-			removeFormVideoOverview();
-			removeByUrl();
-			return;
-		}
+        if (youtubeChannelPagePattern.test(currentURL) && config.c_removeFormChannel) {
+            const match = youtubeChannelShortsPagePattern.exec(currentURL);
+            if (match) {
+                window.location.href = match[1];
+            }
+            // URL & config matches
+            removeReelShelfRenderer();
+            removeFormVideoOverview();
+            // Select all elements with tab-title Shorts
+            var elementsToRemove = document.querySelectorAll('[tab-title="Shorts"]');
+
+            // Loop through each selected element and remove it
+            elementsToRemove.forEach(function (element) {
+                element.style.display = "none";
+            });
+
+            log("Shorts removed from channel.");
+            return;
+        }
+        if (youtubeSearchPagePattern.test(currentURL) && config.c_removeFormSearch) {
+            // URL & config matches
+            removeReelShelfRenderer();
+            removeFormVideoOverview();
+            removeByUrl();
+            return;
+        }
 
 	}
 
