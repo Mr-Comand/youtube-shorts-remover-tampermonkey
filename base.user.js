@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube short remover
 // @namespace    http://tampermonkey.net/
-// @version      base.1.0
+// @version      base.1.1
 // @description  Removes Youtube shorts from search results and watch page, but without a configuration menu.
 // @author       Mr_Comand
 // @license      MIT
@@ -77,7 +77,7 @@
     // Define the regex pattern for the YouTube channel short pages
     //https://www.youtube.com/LinusTechTips/shorts or https://www.youtube.com/@LinusTechTips/shorts ...
     var youtubeChannelShortsPagePattern = /^(https?:\/\/(?:www\.)?youtube\.com\/(?!feed.*)(?!watch.*)(?!short.*)(?!playlist.*)(?!podcasts.*)(?!gaming.*)(?!results.*).+)\/shorts\/?$/;
-    
+
     if (config.c_disableShortPageScrolling) {
         // Function to handle the custom scroll event
         function handleScroll(event) {
