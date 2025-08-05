@@ -222,7 +222,7 @@
 	//Remove shorts from video recommendations of a video
 	function removeReelShelfRenderer() {
 		// Select all "ytd-reel-shelf-renderer" elements
-		var elementsToRemove = document.querySelectorAll('ytd-reel-shelf-renderer');
+		var elementsToRemove = document.querySelectorAll('ytd-reel-shelf-renderer,grid-shelf-view-model');
 
 		// Loop through each selected element and remove it
 		elementsToRemove.forEach(function (element) {
