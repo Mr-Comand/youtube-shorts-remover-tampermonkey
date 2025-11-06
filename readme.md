@@ -26,17 +26,19 @@ This userscript removes YouTube Shorts from various pages on the YouTube website
      - [Greasemonkey](https://www.greasespot.net/)
 
 3. **Install the Script:**
+   - **Full Version (recommended):**
+     - Install the full (merged.js) version if you want to have a configuration menu at [Settings>Playback and performance](https://www.youtube.com/account_playback). The configuration will not be saved in the account but on the browser.
+     - Install the full (merged.js) version of the script by clicking on the following link and then click on the "Install" button in the userscript manager prompt:
+       - [YouTube Shorts Remover Full Version](https://raw.githubusercontent.com/Mr-Comand/youtube-shorts-remover-tampermonkey/main/merrged.user.js)
+
    - **Base Version:**
      - Install the base (base.js) version if you want to edit the configuration directly in the script file.
      - Install the base (base.js) version of the script by clicking on the following link and then click on the "Install" button in the userscript manager prompt:
      - [YouTube Shorts Remover Base Version](https://raw.githubusercontent.com/Mr-Comand/youtube-shorts-remover-tampermonkey/main/base.user.js)
 
-   - **Full Version:**
-     - Install the full (merged.js) version if you want to have a configuration menu at [Settings>Playback and performance](https://www.youtube.com/account_playback). The configuration will not be saved in the account but on the browser.
-     - Install the full (merged.js) version of the script by clicking on the following link and then click on the "Install" button in the userscript manager prompt:
-       - [YouTube Shorts Remover Full Version](https://raw.githubusercontent.com/Mr-Comand/youtube-shorts-remover-tampermonkey/main/merrged.user.js)
 
-4. **Configure Options (Optional):**
+
+5. **Configure Options (Optional):**
     - After installing the script, you can optionally configure its options depending on the version you are using by:
         - using the configuration menu at [Settings > Playback and performance](https://www.youtube.com/account_playback)
         - editing the script directly 
