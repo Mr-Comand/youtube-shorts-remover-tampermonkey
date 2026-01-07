@@ -210,7 +210,7 @@
 	//Remove Sidebar Element Shorts
 	function removeSidebarElement() {
 		// Select all elements with a title Shorts and specific class names
-		var elementsToRemove = document.querySelectorAll('.yt-simple-endpoint[title="Shorts"] ');
+		var elementsToRemove = document.querySelectorAll('.yt-simple-endpoint[title="Shorts"]');
 
 		// Loop through each selected element and remove the parent
 		elementsToRemove.forEach(function (element) {
