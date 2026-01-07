@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube short remover
 // @namespace    http://tampermonkey.net/
-// @version      base.1.2
+// @version      base.1.3
 // @description  Removes Youtube shorts from search results and watch page, but without a configuration menu.
 // @author       Mr_Comand
 // @license      MIT
@@ -180,7 +180,8 @@
     //Remove Sidebar Element Shorts
     function removeSidebarElement() {
         // Select all elements with a title Shorts and specific class names
-        var elementsToRemove = document.querySelectorAll('.yt-simple-endpoint.style-scope.ytd-guide-entry-renderer[title="Shorts"]');
+        var elementsToRemove = document.querySelectorAll('.yt-simple-endpoint[title="Shorts"]');
+
 
         // Loop through each selected element and remove the parent
         elementsToRemove.forEach(function (element) {
