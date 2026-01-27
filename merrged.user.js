@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube short remover
 // @namespace    http://tampermonkey.net/
-// @version      full.1.3
+// @version      full.1.4
 // @description  Removes Youtube shorts from search results and watch page. Configuration Menu to the Settings at https://www.youtube.com/account_playback
 // @author       Mr_Comand
 // @license      MIT
@@ -95,6 +95,11 @@
 	if (config.c_disableShortPageScrolling){
 		// Function to handle the custom scroll event
 		function handleScroll(event) {
+            // If the event started inside the comments or an engagement panel, allow it.
+            if (event.target && event.target.closest && (event.target.closest('#comments') || event.target.closest('ytd-engagement-panel-section-list-renderer'))) {
+                return;
+            }
+			
 			if (youtubeShortPagePattern.test(window.location.href)) {
 
 				// Your custom scroll handling code goes here
