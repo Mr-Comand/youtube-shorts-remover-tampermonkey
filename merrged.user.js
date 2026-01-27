@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube short remover
 // @namespace    http://tampermonkey.net/
-// @version      full.1.3
+// @version      full.1.4
 // @description  Removes Youtube shorts from search results and watch page. Configuration Menu to the Settings at https://www.youtube.com/account_playback
 // @author       Mr_Comand
 // @license      MIT

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube short remover
 // @namespace    http://tampermonkey.net/
-// @version      base.1.3
+// @version      base.1.4
 // @description  Removes Youtube shorts from search results and watch page, but without a configuration menu.
 // @author       Mr_Comand
 // @license      MIT
@@ -82,7 +82,10 @@
         // Function to handle the custom scroll event
         function handleScroll(event) {
             if (youtubeShortPagePattern.test(window.location.href)) {
-
+                // If the event started inside the comments or an engagement panel, allow it.
+                if (event.target && event.target.closest && (event.target.closest('#comments') || event.target.closest('ytd-engagement-panel-section-list-renderer'))) {
+                    return;
+                }
                 // Your custom scroll handling code goes here
                 log("Scrolling is disabled.");
                 sendToHome();
