@@ -32,17 +32,17 @@
 
 	// Configuration variables with default values
     var config = {
-		c_removeFormStartPage: GM_getValue('config.c_removeFormStartPage', true),
-		c_removeFormSubscriptionFeed: GM_getValue('config.c_removeFormSubscriptionFeed', true),
-		c_removeFormAllFeeds: GM_getValue('config.c_removeFormAllFeeds', true), // except SubscriptionFeed
-		c_removeFormFollowUp: GM_getValue('config.c_removeFormFollowUp', true),
-		c_removeFormChannel: GM_getValue('config.c_removeFormChannel', true),
-		c_removeSidebar: GM_getValue('config.c_removeSidebar', true),
+		c_removeFormStartPage: GM_getValue('c_removeFormStartPage', true),
+		c_removeFormSubscriptionFeed: GM_getValue('c_removeFormSubscriptionFeed', true),
+		c_removeFormAllFeeds: GM_getValue('c_removeFormAllFeeds', true), // except SubscriptionFeed
+		c_removeFormFollowUp: GM_getValue('c_removeFormFollowUp', true),
+		c_removeFormChannel: GM_getValue('c_removeFormChannel', true),
+		c_removeSidebar: GM_getValue('c_removeSidebar', true),
         c_removeFormSearch : GM_getValue('c_removeFormSearch', true),
-		c_disableShortPage: GM_getValue('config.c_disableShortPage', true),
-		c_shortPageToWatchPage: GM_getValue('config.c_shortPageToWatchPage', false),
-		c_disableShortPageScrolling: GM_getValue('config.c_disableShortPageScrolling', true),
-		c_consoleColor: GM_getValue('config.c_consoleColor', '#33bd52')
+		c_disableShortPage: GM_getValue('c_disableShortPage', true),
+		c_shortPageToWatchPage: GM_getValue('c_shortPageToWatchPage', false),
+		c_disableShortPageScrolling: GM_getValue('c_disableShortPageScrolling', true),
+		c_consoleColor: GM_getValue('c_consoleColor', '#33bd52')
 	};
 	log("Configuration:");
 	log("c_removeFormStartPage", config.c_removeFormStartPage);
