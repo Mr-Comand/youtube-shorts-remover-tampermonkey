@@ -30,6 +30,7 @@
 		c_removeSidebar: GM_getValue('config.c_removeSidebar', true),
         c_removeFormSearch : GM_getValue('c_removeFormSearch', true),
 		c_disableShortPage: GM_getValue('config.c_disableShortPage', true),
+		c_shortPageToWatchPage: GM_getValue('config.c_shortPageToWatchPage', false),
 		c_disableShortPageScrolling: GM_getValue('config.c_disableShortPageScrolling', true),
 		c_consoleColor: GM_getValue('config.c_consoleColor', '#33bd52')
 	};
@@ -42,6 +43,7 @@
 	log("c_removeSidebar", config.c_removeSidebar);
     log("c_removeFormSearch", config.c_removeFormSearch);
 	log("c_disableShortPage", config.c_disableShortPage);
+    log("c_shortPageToWatchPage", config.c_shortPageToWatchPage);
 	log("c_disableShortPageScrolling", config.c_disableShortPageScrolling);
 	log("c_consoleColor", config.c_consoleColor);
 	log("============================");
@@ -85,6 +87,7 @@
             { label: 'Remove Shorts from Search Page', key: 'c_removeFormSearch', type:"checkbox" },
 			{ label: 'Remove Sidebar Shorts', key: 'c_removeSidebar', type:"checkbox" },
 			{ label: 'Disable Short Page', key: 'c_disableShortPage', type:"checkbox" },
+			{ label: 'Redirect Short Page to Watch Page', key: 'c_shortPageToWatchPage', type:"checkbox" },
 			{ label: 'Disable Short Page Scrolling', key: 'c_disableShortPageScrolling', type:"checkbox" },
 			{ label: 'Console log Color:', key: 'c_consoleColor', type:"color", default:"#33bd52" }
 		];

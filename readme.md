@@ -56,6 +56,7 @@ The script provides the following configuration options:
 - `c_removeSidebar`: Removes Shorts from the sidebar.
 - `c_removeFormSearch`: Removes Shorts from search results.
 - `c_disableShortPage`: Disables YouTube Shorts pages.
+- `c_shortPageToWatchPage`: Redirect Short Page to Watch Page, so you can see videos you have to Watch but only exist as shots.
 - `c_disableShortPageScrolling`: Disables scrolling on YouTube Shorts pages.
 
 ## Configuration menu

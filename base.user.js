@@ -24,6 +24,7 @@
         c_removeFormChannel: true,
         c_removeSidebar: true,
         c_disableShortPage: true,
+        c_shortPageToWatchPage: false,
         c_disableShortPageScrolling: true,
         c_removeFormSearch: true,
         c_consoleColor: '#33bd52',
@@ -37,6 +38,7 @@
     log("c_removeSidebar", config.c_removeSidebar);
     log("c_removeFormSearch", config.c_removeFormSearch);
     log("c_disableShortPage", config.c_disableShortPage);
+    log("c_shortPageToWatchPage", config.c_shortPageToWatchPage);
     log("c_disableShortPageScrolling", config.c_disableShortPageScrolling);
     log("c_consoleColor", config.c_consoleColor);
     log("============================");
@@ -65,7 +67,7 @@
 
     // Define the regex pattern for the YouTube shorts pages
     //https://www.youtube.com/shorts/*
-    var youtubeShortPagePattern = /^https?:\/\/(www\.)?youtube\.com\/shorts.*$/;
+    var youtubeShortPagePattern = /^https?:\/\/(www\.)?youtube\.com\/shorts\/(.*)$/;
 
     // Define the regex pattern for the YouTube search page
     //https://www.youtube.com/shorts/*
@@ -105,6 +107,19 @@
         if (config.c_removeSidebar) {
             removeSidebarElement();
         }
+        // Check if the current URL matches the YouTube short page URL pattern
+        if (youtubeShortPagePattern.test(currentURL) && config.c_shortPageToWatchPage) {
+            log("Shorts page detected. Trying to redirect to watch page.");
+            const match = currentURL.match(youtubeShortPagePattern)
+            if (match)
+                window.location.href = "https://www.youtube.com/watch?v=" + match[2];
+            else {
+                log("Unable to find shorts id for redirect.");
+                sendToHome();
+            }
+            return;
+        }
+
         // Check if the current URL matches the YouTube short page URL pattern
         if (youtubeShortPagePattern.test(currentURL) && config.c_disableShortPage) {
             // URL & config matches

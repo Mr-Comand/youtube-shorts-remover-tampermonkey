@@ -31,17 +31,18 @@
 
 
 	// Configuration variables with default values
-	var config = {
-		c_removeFormStartPage: GM_getValue('c_removeFormStartPage', true),
-		c_removeFormSubscriptionFeed: GM_getValue('c_removeFormSubscriptionFeed', true),
-		c_removeFormAllFeeds: GM_getValue('c_removeFormAllFeeds', true), // except SubscriptionFeed
-		c_removeFormFollowUp: GM_getValue('c_removeFormFollowUp', true),
-		c_removeFormChannel: GM_getValue('c_removeFormChannel', true),
-		c_removeSidebar: GM_getValue('c_removeSidebar', true),
-		c_disableShortPage: GM_getValue('c_disableShortPage', true),
-		c_removeFormSearch : GM_getValue('c_removeFormSearch', true),
-		c_disableShortPageScrolling: GM_getValue('c_disableShortPageScrolling', true),
-		c_consoleColor: GM_getValue('c_consoleColor', '#33bd52')
+    var config = {
+		c_removeFormStartPage: GM_getValue('config.c_removeFormStartPage', true),
+		c_removeFormSubscriptionFeed: GM_getValue('config.c_removeFormSubscriptionFeed', true),
+		c_removeFormAllFeeds: GM_getValue('config.c_removeFormAllFeeds', true), // except SubscriptionFeed
+		c_removeFormFollowUp: GM_getValue('config.c_removeFormFollowUp', true),
+		c_removeFormChannel: GM_getValue('config.c_removeFormChannel', true),
+		c_removeSidebar: GM_getValue('config.c_removeSidebar', true),
+        c_removeFormSearch : GM_getValue('c_removeFormSearch', true),
+		c_disableShortPage: GM_getValue('config.c_disableShortPage', true),
+		c_shortPageToWatchPage: GM_getValue('config.c_shortPageToWatchPage', false),
+		c_disableShortPageScrolling: GM_getValue('config.c_disableShortPageScrolling', true),
+		c_consoleColor: GM_getValue('config.c_consoleColor', '#33bd52')
 	};
 	log("Configuration:");
 	log("c_removeFormStartPage", config.c_removeFormStartPage);
@@ -50,8 +51,9 @@
 	log("c_removeFormFollowUp", config.c_removeFormFollowUp);
 	log("c_removeFormChannel", config.c_removeFormChannel);
 	log("c_removeSidebar", config.c_removeSidebar);
-	log("c_removeFormSearch", config.c_removeFormSearch);
+    log("c_removeFormSearch", config.c_removeFormSearch);
 	log("c_disableShortPage", config.c_disableShortPage);
+    log("c_shortPageToWatchPage", config.c_shortPageToWatchPage);
 	log("c_disableShortPageScrolling", config.c_disableShortPageScrolling);
 	log("c_consoleColor", config.c_consoleColor);
 	log("============================");
@@ -310,7 +312,8 @@
 		removeSidebarElement();
 	}
 
-	function createConfigMenu() {
+	// Function to create configuration menu
+    function createConfigMenu() {
 		// Create menu container
 		var menuContainer = document.createElement('div');
 		menuContainer.id = 'yt-short-remover-config-menu';
@@ -336,9 +339,10 @@
 			{ label: 'Remove Shorts from All Feeds (except Subscription Feed)', key: 'c_removeFormAllFeeds', type:"checkbox" },
 			{ label: 'Remove Shorts from Follow Up Page', key: 'c_removeFormFollowUp', type:"checkbox" },
 			{ label: 'Remove Shorts from Channel Page', key: 'c_removeFormChannel', type:"checkbox" },
-			{ label: 'Remove Shorts from Search Page', key: 'c_removeFormSearch', type:"checkbox" },
+            { label: 'Remove Shorts from Search Page', key: 'c_removeFormSearch', type:"checkbox" },
 			{ label: 'Remove Sidebar Shorts', key: 'c_removeSidebar', type:"checkbox" },
 			{ label: 'Disable Short Page', key: 'c_disableShortPage', type:"checkbox" },
+			{ label: 'Redirect Short Page to Watch Page', key: 'c_shortPageToWatchPage', type:"checkbox" },
 			{ label: 'Disable Short Page Scrolling', key: 'c_disableShortPageScrolling', type:"checkbox" },
 			{ label: 'Console log Color:', key: 'c_consoleColor', type:"color", default:"#33bd52" }
 		];
@@ -355,10 +359,8 @@
 			input.addEventListener('change', function() {
 				if (this.type == "checkbox"){
 					updateConfig(item.key, this.checked);
-					log(item.key, "changed to", this.checked)
 				}else{
 					updateConfig(item.key, this.value);
-					log(item.key, "changed to", this.value)
 				}
 			});
 
