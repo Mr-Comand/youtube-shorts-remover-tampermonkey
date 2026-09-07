@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube short remover
 // @namespace    http://tampermonkey.net/
-// @version      full.1.5
+// @version      full.1.5.1
 // @description  Removes Youtube shorts from search results and watch page. Configuration Menu to the Settings at https://www.youtube.com/account_playback
 // @author       Mr_Comand
 // @license      MIT
@@ -77,7 +77,7 @@
 
 	// Define the regex pattern for the YouTube shorts pages
 	//https://www.youtube.com/shorts/*
-	var youtubeShortPagePattern = /^https?:\/\/(www\.)?youtube\.com\/shorts.*$/;
+    var youtubeShortPagePattern = /^https?:\/\/(www\.)?youtube\.com\/shorts\/(.*)$/;
 
     // Define the regex pattern for the YouTube channel pages
     //https://www.youtube.com/LinusTechTips or https://www.youtube.com/@LinusTechTips ...
@@ -141,6 +141,18 @@
 		if (config.c_removeSidebar){
 			removeSidebarElement();
 		}
+		 // Check if the current URL matches the YouTube short page URL pattern
+        if (youtubeShortPagePattern.test(currentURL) && config.c_shortPageToWatchPage) {
+            log("Shorts page detected. Trying to redirect to watch page.");
+            const match = currentURL.match(youtubeShortPagePattern)
+            if (match)
+                window.location.href = "https://www.youtube.com/watch?v=" + match[2];
+            else {
+                log("Unable to find shorts id for redirect.");
+                sendToHome();
+            }
+            return;
+        }
 		// Check if the current URL matches the YouTube start page URL pattern
 		if (youtubeStartPagePattern.test(currentURL) && config.c_removeFormStartPage) {
 			// URL & config matches
