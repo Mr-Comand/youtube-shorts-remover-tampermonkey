@@ -122,6 +122,19 @@
 		var currentURL = window.location.href;
 		
 		// Check if the current URL matches the YouTube short page URL pattern
+        if (youtubeShortPagePattern.test(currentURL) && config.c_shortPageToWatchPage) {
+            log("Shorts page detected. Trying to redirect to watch page.");
+            const match = currentURL.match(youtubeShortPagePattern)
+            if (match)
+                window.location.href = "https://www.youtube.com/watch?v=" + match[2];
+            else {
+                log("Unable to find shorts id for redirect.");
+                sendToHome();
+            }
+            return;
+        }
+
+		// Check if the current URL matches the YouTube short page URL pattern
 		if (youtubeShortPagePattern.test(currentURL) && config.c_disableShortPage) {
 			// URL & config matches
 			sendToHome();
@@ -141,18 +154,7 @@
 		if (config.c_removeSidebar){
 			removeSidebarElement();
 		}
-		 // Check if the current URL matches the YouTube short page URL pattern
-        if (youtubeShortPagePattern.test(currentURL) && config.c_shortPageToWatchPage) {
-            log("Shorts page detected. Trying to redirect to watch page.");
-            const match = currentURL.match(youtubeShortPagePattern)
-            if (match)
-                window.location.href = "https://www.youtube.com/watch?v=" + match[2];
-            else {
-                log("Unable to find shorts id for redirect.");
-                sendToHome();
-            }
-            return;
-        }
+
 		// Check if the current URL matches the YouTube start page URL pattern
 		if (youtubeStartPagePattern.test(currentURL) && config.c_removeFormStartPage) {
 			// URL & config matches
