@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube short remover Config menu
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      configOnly.1.5
 // @description  You can't extend the base file you have to use the merged version. Adds a Configuration Menu to the Settings at https://www.youtube.com/account_playback  
 // @author       Mr_Comand
 // @match        https://www.youtube.com/account_playback
