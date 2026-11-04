@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube short remover
 // @namespace    http://tampermonkey.net/
-// @version      full.1.4
+// @version      full.1.5.1
 // @description  Removes Youtube shorts from search results and watch page. Configuration Menu to the Settings at https://www.youtube.com/account_playback
 // @author       Mr_Comand
 // @license      MIT
@@ -31,15 +31,16 @@
 
 
 	// Configuration variables with default values
-	var config = {
+    var config = {
 		c_removeFormStartPage: GM_getValue('c_removeFormStartPage', true),
 		c_removeFormSubscriptionFeed: GM_getValue('c_removeFormSubscriptionFeed', true),
 		c_removeFormAllFeeds: GM_getValue('c_removeFormAllFeeds', true), // except SubscriptionFeed
 		c_removeFormFollowUp: GM_getValue('c_removeFormFollowUp', true),
 		c_removeFormChannel: GM_getValue('c_removeFormChannel', true),
 		c_removeSidebar: GM_getValue('c_removeSidebar', true),
+        c_removeFormSearch : GM_getValue('c_removeFormSearch', true),
 		c_disableShortPage: GM_getValue('c_disableShortPage', true),
-		c_removeFormSearch : GM_getValue('c_removeFormSearch', true),
+		c_shortPageToWatchPage: GM_getValue('c_shortPageToWatchPage', false),
 		c_disableShortPageScrolling: GM_getValue('c_disableShortPageScrolling', true),
 		c_consoleColor: GM_getValue('c_consoleColor', '#33bd52')
 	};
@@ -50,8 +51,9 @@
 	log("c_removeFormFollowUp", config.c_removeFormFollowUp);
 	log("c_removeFormChannel", config.c_removeFormChannel);
 	log("c_removeSidebar", config.c_removeSidebar);
-	log("c_removeFormSearch", config.c_removeFormSearch);
+    log("c_removeFormSearch", config.c_removeFormSearch);
 	log("c_disableShortPage", config.c_disableShortPage);
+    log("c_shortPageToWatchPage", config.c_shortPageToWatchPage);
 	log("c_disableShortPageScrolling", config.c_disableShortPageScrolling);
 	log("c_consoleColor", config.c_consoleColor);
 	log("============================");
@@ -75,7 +77,7 @@
 
 	// Define the regex pattern for the YouTube shorts pages
 	//https://www.youtube.com/shorts/*
-	var youtubeShortPagePattern = /^https?:\/\/(www\.)?youtube\.com\/shorts.*$/;
+    var youtubeShortPagePattern = /^https?:\/\/(www\.)?youtube\.com\/shorts\/(.*)$/;
 
     // Define the regex pattern for the YouTube channel pages
     //https://www.youtube.com/LinusTechTips or https://www.youtube.com/@LinusTechTips ...
@@ -120,6 +122,19 @@
 		var currentURL = window.location.href;
 		
 		// Check if the current URL matches the YouTube short page URL pattern
+        if (youtubeShortPagePattern.test(currentURL) && config.c_shortPageToWatchPage) {
+            log("Shorts page detected. Trying to redirect to watch page.");
+            const match = currentURL.match(youtubeShortPagePattern)
+            if (match)
+                window.location.href = "https://www.youtube.com/watch?v=" + match[2];
+            else {
+                log("Unable to find shorts id for redirect.");
+                sendToHome();
+            }
+            return;
+        }
+
+		// Check if the current URL matches the YouTube short page URL pattern
 		if (youtubeShortPagePattern.test(currentURL) && config.c_disableShortPage) {
 			// URL & config matches
 			sendToHome();
@@ -139,6 +154,7 @@
 		if (config.c_removeSidebar){
 			removeSidebarElement();
 		}
+
 		// Check if the current URL matches the YouTube start page URL pattern
 		if (youtubeStartPagePattern.test(currentURL) && config.c_removeFormStartPage) {
 			// URL & config matches
@@ -310,7 +326,8 @@
 		removeSidebarElement();
 	}
 
-	function createConfigMenu() {
+	// Function to create configuration menu
+    function createConfigMenu() {
 		// Create menu container
 		var menuContainer = document.createElement('div');
 		menuContainer.id = 'yt-short-remover-config-menu';
@@ -336,9 +353,10 @@
 			{ label: 'Remove Shorts from All Feeds (except Subscription Feed)', key: 'c_removeFormAllFeeds', type:"checkbox" },
 			{ label: 'Remove Shorts from Follow Up Page', key: 'c_removeFormFollowUp', type:"checkbox" },
 			{ label: 'Remove Shorts from Channel Page', key: 'c_removeFormChannel', type:"checkbox" },
-			{ label: 'Remove Shorts from Search Page', key: 'c_removeFormSearch', type:"checkbox" },
+            { label: 'Remove Shorts from Search Page', key: 'c_removeFormSearch', type:"checkbox" },
 			{ label: 'Remove Sidebar Shorts', key: 'c_removeSidebar', type:"checkbox" },
 			{ label: 'Disable Short Page', key: 'c_disableShortPage', type:"checkbox" },
+			{ label: 'Redirect Short Page to Watch Page', key: 'c_shortPageToWatchPage', type:"checkbox" },
 			{ label: 'Disable Short Page Scrolling', key: 'c_disableShortPageScrolling', type:"checkbox" },
 			{ label: 'Console log Color:', key: 'c_consoleColor', type:"color", default:"#33bd52" }
 		];
@@ -355,10 +373,8 @@
 			input.addEventListener('change', function() {
 				if (this.type == "checkbox"){
 					updateConfig(item.key, this.checked);
-					log(item.key, "changed to", this.checked)
 				}else{
 					updateConfig(item.key, this.value);
-					log(item.key, "changed to", this.value)
 				}
 			});
 
